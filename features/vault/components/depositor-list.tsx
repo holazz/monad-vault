@@ -2,6 +2,7 @@
 
 import { isAddressEqual } from 'viem'
 import { useAccount } from 'wagmi'
+import { clsx } from 'clsx'
 import { useDeposit } from '../hooks/use-deposit'
 import { formatAddress } from '@/lib/utils'
 import { MONAD_EXPLORER_URL } from '@/lib/chains'
@@ -41,11 +42,12 @@ export function DepositorList() {
                   return (
                     <li
                       key={index}
-                      className={`flex items-center justify-between p-3 rounded-md ${
+                      className={clsx(
+                        'flex items-center justify-between p-3 rounded-md',
                         isUserAddress ? 'bg-primary/10 border border-primary/30' : 'bg-secondary'
-                      }`}
+                      )}
                     >
-                      <span className={`text-sm ${isUserAddress ? 'font-medium' : ''}`}>
+                      <span className={clsx('text-sm', isUserAddress ? 'font-medium' : '')}>
                         {formatAddress(depositor)}
                         {isUserAddress && ' (You)'}
                       </span>

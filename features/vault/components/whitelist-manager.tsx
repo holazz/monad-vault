@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { isAddress, isAddressEqual } from 'viem'
 import { useAccount } from 'wagmi'
+import { clsx } from 'clsx'
 import { Plus, Trash2, Upload } from 'lucide-react'
 import { toast } from 'sonner'
 import { Skeleton } from '@/components/ui/skeleton'
@@ -319,9 +320,10 @@ export function WhitelistManager() {
                     return (
                       <li
                         key={index}
-                        className={`flex items-center gap-2 p-2 rounded-md ${
+                        className={clsx(
+                          'flex items-center gap-2 p-2 rounded-md',
                           isUserAddress ? 'bg-primary/10 border border-primary/30' : 'hover:bg-secondary'
-                        }`}
+                        )}
                       >
                         <Checkbox
                           id={`address-${index}`}
@@ -331,7 +333,7 @@ export function WhitelistManager() {
                         />
                         <label
                           htmlFor={`address-${index}`}
-                          className={`flex-1 cursor-pointer text-sm ${isUserAddress ? 'font-medium' : ''}`}
+                          className={clsx('flex-1 cursor-pointer text-sm', isUserAddress ? 'font-medium' : '')}
                         >
                           {formatAddress(addr)}
                           {isUserAddress && ' (You)'}
