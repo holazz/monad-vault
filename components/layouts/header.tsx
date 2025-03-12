@@ -16,7 +16,7 @@ export default function Header() {
         </Link>
         <nav className="flex flex-1 items-center justify-end space-x-2">
           <Button variant="ghost" size="icon" asChild>
-            <Link href="https://github.com" target="_blank" rel="noreferrer">
+            <Link href="https://github.com/holazz/monad-vault" target="_blank" rel="noreferrer">
               <Github size={24} />
             </Link>
           </Button>
