@@ -267,7 +267,7 @@ export function WhitelistManager() {
                 <Button variant="outline" onClick={() => setDialogOpen(false)}>
                   Cancel
                 </Button>
-                <Button onClick={handleBatchAdd} disabled={isFetchWhitelistLoading || isUpdateWhitelistLoading}>
+                <Button onClick={handleBatchAdd} disabled={isUpdateWhitelistLoading}>
                   Add Addresses
                 </Button>
               </DialogFooter>
