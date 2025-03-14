@@ -3,6 +3,7 @@
 import { useState, useCallback, useEffect } from 'react'
 import { usePublicClient, useReadContract, useWriteContract, useAccount, useBalance } from 'wagmi'
 import { parseEther, formatEther } from 'viem'
+import { useWhitelist } from './use-whitelist'
 import { calculateMaxTransactionAmount } from '@/lib/gas'
 import { VAULT_CONTRACT_ADDRESS } from '../constants'
 import abi from '../constants/abi'
@@ -11,7 +12,8 @@ import type { Address } from 'viem'
 export const useDeposit = () => {
   const client = usePublicClient()
   const { address } = useAccount()
-  const { isLoading: isBalanceLoading, data: balance } = useBalance({ address })
+  const { refetchWhitelist } = useWhitelist()
+  const { isLoading: isBalanceLoading, data: balance, refetch: refetchBalance } = useBalance({ address })
   const { writeContractAsync } = useWriteContract()
   const [isMaxAmountLoading, setIsMaxAmountLoading] = useState(false)
   const [isDepositLoading, setIsDepositLoading] = useState(false)
@@ -73,6 +75,9 @@ export const useDeposit = () => {
           value: parseEther(amount),
         })
         await client?.waitForTransactionReceipt({ hash })
+        refetchBalance()
+        refetchDepositors()
+        refetchWhitelist()
         return hash
       } catch (e) {
         throw e
@@ -80,7 +85,7 @@ export const useDeposit = () => {
         setIsDepositLoading(false)
       }
     },
-    [address, writeContractAsync, client]
+    [address, writeContractAsync, client, refetchBalance, refetchDepositors, refetchWhitelist]
   )
 
   return {
