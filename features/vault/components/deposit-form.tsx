@@ -34,7 +34,6 @@ export function DepositForm() {
       toast.error('Deposit failed', {
         description: e?.shortMessage || e?.message || 'Please try again later',
       })
-
     }
   }
 
@@ -43,17 +42,8 @@ export function DepositForm() {
       <TokenInput value={amount} onChange={setAmount} onMaxClick={() => setAmount(maxAmount)} />
 
       <div className="flex justify-between text-sm text-muted-foreground px-1">
-        {isBalanceLoading || isMaxAmountLoading ? (
-          <>
-            <Skeleton className="h-5 w-20" />
-            <Skeleton className="h-5 w-20" />
-          </>
-        ) : (
-          <>
-            <span>Balance: {balance} MON</span>
-            <span>Max: {maxAmount} MON</span>
-          </>
-        )}
+        {isBalanceLoading ? <Skeleton className="h-5 w-20" /> : <span>Balance: {balance} MON</span>}
+        {isMaxAmountLoading ? <Skeleton className="h-5 w-20" /> : <span>Max: {maxAmount} MON</span>}
       </div>
 
       <ActionButton

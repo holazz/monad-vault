@@ -4,11 +4,8 @@ import { Tabs, TabsList, TabsTrigger, TabsContent } from '@/components/ui/tabs'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { DepositForm } from './deposit-form'
 import { WithdrawForm } from './withdraw-form'
-import { useState } from 'react'
 
 export function VaultCard() {
-  const [activeTab, setActiveTab] = useState('deposit')
-
   return (
     <Card className="flex flex-col max-h-[350px]">
       <CardHeader>
@@ -16,7 +13,7 @@ export function VaultCard() {
         <CardDescription>Deposit funds or withdraw from the vault</CardDescription>
       </CardHeader>
       <CardContent className="flex-1">
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full h-full flex flex-col">
+        <Tabs defaultValue="deposit" className="w-full h-full flex flex-col">
           <TabsList className="grid w-full grid-cols-2 mb-4">
             <TabsTrigger value="deposit">Deposit</TabsTrigger>
             <TabsTrigger value="withdraw">Withdraw</TabsTrigger>
