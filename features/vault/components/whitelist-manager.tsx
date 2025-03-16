@@ -37,11 +37,9 @@ export function WhitelistManager() {
   const { isFetchWhitelistLoading, isUpdateWhitelistLoading, whitelist, updateWhitelist } = useWhitelist()
   const { address: userAddress } = useAccount()
 
-  // First, add a new state for the confirmation dialog
   const [confirmDialogOpen, setConfirmDialogOpen] = useState(false)
   const [validAddressesToAdd, setValidAddressesToAdd] = useState<Address[]>([])
 
-  // Modify the handleBatchAdd function to show confirmation dialog instead of immediately adding addresses
   const handleAddAddress = async () => {
     if (!isAddress(newAddress)) {
       toast.error('Invalid address', {
@@ -145,7 +143,6 @@ export function WhitelistManager() {
     setConfirmDialogOpen(true)
   }
 
-  // Add a new function to handle the confirmed batch add
   const handleConfirmedBatchAdd = async () => {
     try {
       await updateWhitelist(validAddressesToAdd, true)
@@ -204,15 +201,12 @@ export function WhitelistManager() {
     }
   }
 
-  // Add this right before the return statement
   const sortedWhitelist = [...whitelist].sort((a, b) => {
-    // User's address always comes first
     if (userAddress && isAddressEqual(a, userAddress)) return -1
     if (userAddress && isAddressEqual(b, userAddress)) return 1
     return 0
   })
 
-  // Now modify the return statement to include the confirmation dialog and update the whitelist rendering
   return (
     <Card>
       <CardHeader>
