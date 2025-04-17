@@ -286,16 +286,18 @@ export function WhitelistManager() {
                 Select All
               </label>
             </div>
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={handleRemoveSelected}
-              disabled={selectedAddresses.length === 0 || isFetchWhitelistLoading || isUpdateWhitelistLoading}
-              className="text-destructive hover:text-destructive"
-            >
-              <Trash2 size={16} />
-              Remove Selected
-            </Button>
+            {selectedAddresses.length > 0 && !isFetchWhitelistLoading && !isUpdateWhitelistLoading && (
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={handleRemoveSelected}
+                disabled={selectedAddresses.length === 0 || isFetchWhitelistLoading || isUpdateWhitelistLoading}
+                className="text-destructive hover:text-destructive"
+              >
+                <Trash2 size={16} />
+                Remove Selected
+              </Button>
+            )}
           </div>
 
           {isFetchWhitelistLoading || isUpdateWhitelistLoading ? (
